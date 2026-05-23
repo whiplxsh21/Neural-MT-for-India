@@ -52,13 +52,15 @@ EDA ran before any model work and directly shaped architecture decisions, not th
 
 **Finding:** Bengali was the most compact, with 95.39% of sentences under 25 tokens. English and Hindi both had ~85% of sentences under 25 tokens. This set `MAX_LENGTH = 25` globally, capturing the vast majority of the corpus without padding waste.
 
-![alt text](image.png)
+<img width="740" height="369" alt="image" src="https://github.com/user-attachments/assets/2657476d-78aa-4c3e-8b84-68f3e4a212ae" />
+
 
 ### Source-Target Length Correlation
 
 English-Hindi lengths had a Pearson correlation of 0.92, and English-Bengali 0.88. Both pairs cluster tightly around the y=x line. This confirmed that the sequence lengths are mostly equivalent across languages, so no special positional encoding adjustments were needed for the transformer.
 
-![alt text](image.png)
+<img width="668" height="450" alt="image" src="https://github.com/user-attachments/assets/624d4524-da3e-464f-a756-ea06810e2404" />
+
 
 ### Vocabulary Distribution
 
@@ -71,7 +73,8 @@ Final vocabulary sizes:
 
 The Bengali vocabulary is nearly twice the size of Hindi's, with a type-token ratio of 0.108 vs 0.053. Bengali is morphologically richer, meaning the decoder is predicting over a much larger output space at each step.
 
-![alt text](image-1.png)
+<img width="648" height="272" alt="image" src="https://github.com/user-attachments/assets/16b0a696-6168-4ea6-ae0f-bb79e228a14f" />
+
 
 ---
 
@@ -116,9 +119,10 @@ Vanilla RNN, LSTM, GRU, and their bidirectional variants. Single-layer models co
 
 ### Phase 2: Attention Models (Submissions 6-12)
 
-Added Bahdanau and Luong attention mechanisms on top of Bi-GRU and Bi-LSTM. The decoder now attends over all encoder hidden states rather than just the final one. Long-range dependencies improved substantially. Score jumped to ~0.27. Stacked LSTMs and Stacked Bi-LSTMs were also tried but didn't beat the attention models.
+Added Bahdanau and Luong attention mechanisms on top of Bi-GRU and Bi-LSTM. The decoder now attends over all encoder hidden states rather than just the final one. Long-range dependencies improved substantially. Score jumped to ~0.27. Stacked LSTMs and Stacked Bi-LSTMs were also tried but didn't beat the attention models. Below figure depicts the encoder-decoder architecture for these models:
 
-![alt text](image-2.png)
+<img width="714" height="442" alt="image" src="https://github.com/user-attachments/assets/6beac65d-c58f-4561-bdd9-9ca8b59409f5" />
+
 
 ---
 
@@ -143,9 +147,10 @@ The decoder's token embedding matrix and the final linear projection layer share
 ```python
 self.decoder.fc_out.weight = self.decoder.tok_embedding.weight
 ```
-This reduces total parameters by millions and forces the embedding space and output logit space to stay semantically aligned. It produced the single largest performance jump of any individual change.
+This reduces total parameters by millions and forces the embedding space and output logit space to stay semantically aligned. It produced the single largest performance jump of any individual change. The graph below depicts the best performing model’s architecture:
 
-![alt text](image-3.png)
+<img width="745" height="671" alt="image" src="https://github.com/user-attachments/assets/280754c8-3b5b-47d4-baa3-1dc437dd47ee" />
+
 
 ---
 
