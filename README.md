@@ -16,16 +16,6 @@ Neural Machine Translation from English to Hindi and Bengali, built entirely fro
 | BLEU | 0.157 |
 | Total Submissions (Training Phase) | 25 |
 
-**Submissions by week during training phase:**
-
-| Week | Submissions |
-|------|-------------|
-| Week 1 | 2 |
-| Week 2 | 0 |
-| Week 3 | 2 |
-| Week 4 | 21 |
-| **Total** | **25** |
-
 ---
 
 ## Problem
